@@ -1,0 +1,17 @@
+body {
+  background-color: black;
+  text-align: center;
+  color: white; 
+}
+
+button {
+	background-color: transparent;
+	border-color: transparent;
+	color: transparent;
+	box-shadow: transparent;
+	text-shadow: transparent;
+}
+
+#playbuttonimg {
+	width: 100px;
+}

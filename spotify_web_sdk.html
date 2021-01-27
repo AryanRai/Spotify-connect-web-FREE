@@ -11,6 +11,7 @@
   <span id="myText"></span>
   <img id="current-track"/>
   <h3 id="current-track-name"></h3>
+  <button id="button">hello</button>
   <script>
     var hash = location.hash.substr(1);;
     var raw_token = hash.replace("access_token=", "");
@@ -45,6 +46,11 @@
         console.log('Device ID has gone offline', device_id);
       });
 
+      button.onclick = function(){
+       player.togglePlay().then(() => {
+      console.log('Toggled playback!');
+      });
+      };
       // Connect to the player!
       player.connect();
     };

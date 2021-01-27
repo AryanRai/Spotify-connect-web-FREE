@@ -45,7 +45,7 @@ print(token)
 f= open("token.txt","w+")
 f.write(token)
 f.close()
-player = 'file:///C:/Users/aryan/Desktop/spotipy/spotify_web_sdk.html'
+player = 'file:///C:/Users/aryan/OneDrive/spotipy/spotify_web_sdk.html'
 url = player + "#" + token
 webbrowser.register('chrome',
         None,
