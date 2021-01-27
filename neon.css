@@ -4,12 +4,12 @@ body {
   color: white; 
 }
 
-button {
+#playbutton {
 	background-color: transparent;
-	border-color: transparent;
+	border: 0;
 	color: transparent;
 	box-shadow: transparent;
-	text-shadow: transparent;
+  outline: 0;
 }
 
 #playbuttonimg {
