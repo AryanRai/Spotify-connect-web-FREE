@@ -1,20 +1,23 @@
-#playbuttonimg {
-	width: 100px;
-}
-
-
 body {
     margin: 0;
     padding: 0;
     align-items: center;
     background: #000;
     align-content: center;
+    text-align: center;
     
 }
 
+
+
+#playbuttonimg {
+	width: 100px;
+    align-self: center;
+}
+
 #playbutton {
-    width: 220px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
     border: none;
     outline: none;
     color: #fff;
@@ -23,7 +26,7 @@ body {
     position: relative;
     z-index: 0;
     border-radius: 10px;
-    align-items: content;
+    align-items: center;
 }
 
 #playbutton:before {
@@ -72,3 +75,4 @@ body {
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
 }
+
