@@ -8,7 +8,15 @@ body {
     
 }
 
+h1 {
+    color: white;
+    font-weight: bolder;
+}
 
+h4 {
+    color: white;
+    font-weight: bold;
+}
 
 #playbuttonimg {
 	width: 120px;
