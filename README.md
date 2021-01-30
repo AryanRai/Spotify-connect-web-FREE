@@ -7,7 +7,7 @@ Running on it with magic mirror. Here comes the
 Problem. My Spotify premium expired AND SPOTIFY 
 DOES ALLOW U TO USE THE CONNECT API FOR FREE USERS 
 AND I KNOW WHY NOT JUST BUY IT AGAIN? BECAUSE I 
-CANT. U THINK IF I COULD HAV WHY WIULD I MADE THIS 
+CANT. U THINK IF I COULD HAV WHY WOULD I MADE THIS 
 THING EVER. so I went searching for my options.
 
 OPTIONS
