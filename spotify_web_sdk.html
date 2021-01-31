@@ -1,30 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-  <title>Spotify Web Playback SDK Quick Start Tutorial</title>
-
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <meta charset="UTF-8">
+  <title>CodePen - Music Player | Audio Player 🎵</title>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./glass.css">
+`<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-  <h1>Spotify Web Player</h1>
-  <h4>Open Spotify <code>Device connect menu > Magic Speaker > Press play</code></h2>
-  <span id="myText"></span>
-  <img id="current-track"/>
-  <h3 id="current-track-name"></h3>
-  <button id="button">hello</button>
-  <script>
+<!-- partial:index.partial.html -->
+<!-- Tracks used in this music/audio player application are free to use. I downloaded them from Soundcloud and NCS websites. I am not the owner of these tracks. -->
+<span id="myText"></span>
+    <div id="app-cover">
+        <div id="bg-artwork"></div>
+        <div id="bg-layer"></div>
+        <div id="player">
+            <div id="player-track">
+                <div id="album-name"></div>
+                <div id="track-name"></div>
+                <div id="track-time">
+                    <div id="current-time"></div>
+                    <div id="track-length"></div>
+                </div>
+                <div id="s-area">
+                    <div id="ins-time"></div>
+                    <div id="s-hover"></div>
+                    <div id="seek-bar"></div>
+                </div>
+            </div>
+            <div id="player-content">
+                <div id="album-art">
+                    <img src="assets/disk.jpg" class="active" id="_1">
+                    <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_2.jpg" id="_2">
+                    
+                    <div id="buffer-box">Buffering ...</div>
+                </div>
+                <div id="player-controls">
+                    <div class="control">
+                        <div class="button" id="play-previous">
+                            <i class="fas fa-backward"></i>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="button" id="play-pause-button">
+                            <i id="playpause" class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="button" id="play-next">
+                            <i class="fas fa-forward"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    
+    var playbutton = document.getElementById('play-pause-button')
+    var id = "abc"
+    var spotify_uri = "spotify:track:463CkQjx2Zk1yXoBuierM9"
     var hash = location.hash.substr(1);;
     var raw_token = hash.replace("access_token=", "");
-
+    var musicstatus = "paused";
     var auth_token = raw_token.replace("&token_type=Bearer&expires_in=3600", "");
       document.getElementById("myText").innerHTML = auth_token;
         const token = auth_token
-        
+      i = document.getElementById('playpause')  
+    
+
     window.onSpotifyWebPlaybackSDKReady = () => {
       
       const player = new Spotify.Player({
         name: 'Magic Speaker',
-        getOAuthToken: cb => { cb(token); }
+        getOAuthToken: cb => { cb(token); 
+            
+          }
       });
 
       // Error handling
@@ -34,27 +85,72 @@
       player.addListener('playback_error', ({ message }) => { console.error(message); });
 
       // Playback status updates
-      player.addListener('player_state_changed', state => { console.log(state); });
+      player.addListener('player_state_changed', state => { console.log(state); 
+             
+             musicstatus = state.paused;              
+             console.log("uluulu");
+             console.log(musicstatus);
+             
+             if (musicstatus == false) {
+              i.setAttribute('class','fas fa-pause');
+             }
+             if (musicstatus == true) {
+              i.setAttribute('class','fas fa-play');
+            }
+      });
 
       // Ready
       player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
+        
+        id = device_id
+        console.log('Ready with Device ID', id);
+        player.getCurrentState().then(state => {
+        if (!state) {
+            console.error('User is not playing music through the Web Playback SDK');
+        return;
+  }
+
+  let {
+    current_track,
+    next_tracks: [next_track]
+  } = state.track_window;
+
+  console.log('Currently Playing', current_track);
+  console.log('Playing Next', next_track);
+});
+
       });
 
       // Not Ready
       player.addListener('not_ready', ({ device_id }) => {
         console.log('Device ID has gone offline', device_id);
+       
       });
 
-      button.onclick = function(){
-       player.togglePlay().then(() => {
-      console.log('Toggled playback!');
-      });
+     playbutton.onclick = function(){
+       
+      
+      player.togglePlay().then(() => {
+        console.log('Toggled playback!');
+      
+  });
+
       };
+     
+
       // Connect to the player!
       player.connect();
+
     };
+
+
+ 
+    
+  
+
   </script>
+<!-- <a href="https://www.youtube.com/channel/UC7hSS_eujjZOEQrjsda76gA/videos" target="_blank" id="ytd-url">My YouTube Channel</a> -->
+<!-- partial -->
   
 </body>
 </html>
