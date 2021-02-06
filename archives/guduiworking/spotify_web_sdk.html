@@ -5,12 +5,11 @@
   <title>Spotify ig</title>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./glass.css">
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
 
-<!-- <span id="myText"></span> -->
+<span id="myText"></span>
     <div id="app-cover">
         <div id="bg-artwork"></div>
         <div id="bg-layer"></div>
@@ -51,7 +50,7 @@
                             <i class="fas fa-forward"></i>
                         </div>
                     </div>
-                  <!--  <button id="refresh">refresh </button> -->
+                    <button id="refresh">refresh </button>
                 </div>
             </div>
         </div>
@@ -71,47 +70,19 @@
     var previousbutton = document.getElementById('play-previous')
     var nextbutton = document.getElementById('play-next')
     i = document.getElementById('playpause')
-
     var id = "abc"
+    var spotify_uri = "spotify:track:463CkQjx2Zk1yXoBuierM9"
     var hash = location.hash.substr(1);;
-    var raw_token = hash;
+    var raw_token = hash.replace("access_token=", "");
     
     var musicstatus = "paused";
     var trackname = "";
     var artistname = "";
     var albumart = "";
 
-    var auth_code = raw_token;
-    var ajaxResult = [];
-    var access_token = "";
-    var refresh_token = "";
-    var client_id = "920c3cf9d0784efb977c1b9d8c127d93";
-    var client_secret = "0d4ad994fff34cdbb964f8697748ad9e";
-    var redirect_uri = "http://localhost:5000/spotify";
-
-    jQuery.ajax({
-        url : 'https://accounts.spotify.com/api/token',
-        type: 'POST',
-        data: {grant_type: "authorization_code", code: auth_code, redirect_uri: redirect_uri, client_id: client_id, client_secret: client_secret},
-        success: function(data) {
-          ajaxResult.push(data);
-          console.log(data);
-          var returnjson = data;
-          access_token =  returnjson.access_token;
-          refresh_token = returnjson.refresh_token;
-          console.log("token",access_token);
-          console.log("refresh",refresh_token);
-          
-        }
-
-      });
-    
-        
-    
-      
-     
-
-    
+    var auth_token = raw_token.replace("&token_type=Bearer&expires_in=3600", "");
+      document.getElementById("myText").innerHTML = auth_token;
+        const token = auth_token
         
     
 
@@ -119,7 +90,7 @@
       
       const player = new Spotify.Player({
         name: 'Magic Speaker',
-        getOAuthToken: cb => { cb(access_token); 
+        getOAuthToken: cb => { cb(token); 
             
           }
       });
@@ -230,23 +201,13 @@
 });
       };
 
-      /*
        refreshbtn.onclick = function(){             
-      
-      jQuery.ajax({
-        url : 'https://accounts.spotify.com/api/token',
-        type: 'POST',
-        data: {grant_type: "authorization_code", code: auth_code, redirect_uri: "http://localhost:5000/spotify", client_id: "xyz", client_secret: "pqr"},
-        success: function(data) {
-          ajaxResult.push(data);
-          console.log(data);
-        }
-
-      });
-      
+          console.log(token);
+          console.log('token');
+          getOAuthToken: callback => { callback(token); 
+            
+          }
       };
-      */
-  
       // Connect to the player!
       player.connect();
 

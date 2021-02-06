@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <title>Spotify ig</title>
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./glass.css">
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+`<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-
-
-<!-- <span id="myText"></span> -->
+<!-- partial:index.partial.html -->
+<!-- Tracks used in this music/audio player application are free to use. I downloaded them from Soundcloud and NCS websites. I am not the owner of these tracks. -->
+<span id="myText"></span>
     <div id="app-cover">
         <div id="bg-artwork"></div>
         <div id="bg-layer"></div>
@@ -20,7 +19,7 @@
                 <div id="track-name"></div>
                 <div id="track-time">
                     <div id="current-time"></div>
-                    <div id="track-length"></div>             
+                    <div id="track-length"></div>
                 </div>
                 <div id="s-area">
                     <div id="ins-time"></div>
@@ -28,7 +27,7 @@
                     <div id="seek-bar"></div>
                 </div>
             </div>
-            <div id="player-content">             
+            <div id="player-content">
                 <div id="album-art">
                     <img src="assets/disk.jpg" class="active" id="_1">
                     <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_2.jpg" id="_2">
@@ -51,14 +50,12 @@
                             <i class="fas fa-forward"></i>
                         </div>
                     </div>
-                  <!--  <button id="refresh">refresh </button> -->
                 </div>
             </div>
         </div>
     </div>
 
 <script>
-    var refreshbtn = document.getElementById('refresh')
     var albumartarea = document.getElementById('album-art')
     var bgimg = document.getElementById('bg-artwork')
     var imgdisk = document.getElementById('_1')
@@ -71,47 +68,19 @@
     var previousbutton = document.getElementById('play-previous')
     var nextbutton = document.getElementById('play-next')
     i = document.getElementById('playpause')
-
     var id = "abc"
+    var spotify_uri = "spotify:track:463CkQjx2Zk1yXoBuierM9"
     var hash = location.hash.substr(1);;
-    var raw_token = hash;
+    var raw_token = hash.replace("access_token=", "");
     
     var musicstatus = "paused";
     var trackname = "";
     var artistname = "";
     var albumart = "";
 
-    var auth_code = raw_token;
-    var ajaxResult = [];
-    var access_token = "";
-    var refresh_token = "";
-    var client_id = "920c3cf9d0784efb977c1b9d8c127d93";
-    var client_secret = "0d4ad994fff34cdbb964f8697748ad9e";
-    var redirect_uri = "http://localhost:5000/spotify";
-
-    jQuery.ajax({
-        url : 'https://accounts.spotify.com/api/token',
-        type: 'POST',
-        data: {grant_type: "authorization_code", code: auth_code, redirect_uri: redirect_uri, client_id: client_id, client_secret: client_secret},
-        success: function(data) {
-          ajaxResult.push(data);
-          console.log(data);
-          var returnjson = data;
-          access_token =  returnjson.access_token;
-          refresh_token = returnjson.refresh_token;
-          console.log("token",access_token);
-          console.log("refresh",refresh_token);
-          
-        }
-
-      });
-    
-        
-    
-      
-     
-
-    
+    var auth_token = raw_token.replace("&token_type=Bearer&expires_in=3600", "");
+      document.getElementById("myText").innerHTML = auth_token;
+        const token = auth_token
         
     
 
@@ -119,37 +88,20 @@
       
       const player = new Spotify.Player({
         name: 'Magic Speaker',
-        getOAuthToken: cb => { cb(access_token); 
+        getOAuthToken: cb => { cb(token); 
             
           }
       });
 
       // Error handling
-      player.addListener('initialization_error', ({ message }) => { 
-        console.error(message); 
-        console.error("initialization_error");
-        
-
-      });
-      player.addListener('authentication_error', ({ message }) => { 
-        console.error(message);
-        console.error("authentication_error");
-        
-      });
-      player.addListener('account_error', ({ message }) => { 
-        console.error(message);
-        console.error("account_error"); 
-       
-      });
-      player.addListener('playback_error', ({ message }) => { 
-        console.error(message); 
-        console.error("playback_error");
-       
-      });
+      player.addListener('initialization_error', ({ message }) => { console.error(message); });
+      player.addListener('authentication_error', ({ message }) => { console.error(message); });
+      player.addListener('account_error', ({ message }) => { console.error(message); });
+      player.addListener('playback_error', ({ message }) => { console.error(message); });
 
       // Playback status updates
-      player.addListener('player_state_changed', state => { 
-             console.log(state); 
+      player.addListener('player_state_changed', state => { console.log(state); 
+             
              albumart = state.track_window.current_track.album.images[2].url;
              artistname = state.track_window.current_track.artists[0].name;
              trackname = state.track_window.current_track.name;              
@@ -230,23 +182,6 @@
 });
       };
 
-      /*
-       refreshbtn.onclick = function(){             
-      
-      jQuery.ajax({
-        url : 'https://accounts.spotify.com/api/token',
-        type: 'POST',
-        data: {grant_type: "authorization_code", code: auth_code, redirect_uri: "http://localhost:5000/spotify", client_id: "xyz", client_secret: "pqr"},
-        success: function(data) {
-          ajaxResult.push(data);
-          console.log(data);
-        }
-
-      });
-      
-      };
-      */
-  
       // Connect to the player!
       player.connect();
 

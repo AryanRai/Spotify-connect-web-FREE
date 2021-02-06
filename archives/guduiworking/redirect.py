@@ -3,7 +3,7 @@ import webbrowser
 
 app = Flask(__name__)
 
-authcode = "abc"
+token = "abc"
 
 
     
@@ -22,9 +22,9 @@ def shutdown():
         
 @app.route('/spotify', methods =["GET", "POST"]) 
 def gfg(): 
-    global authcode
-    authcode = request.form.get("authcode") 
-    print(authcode)
+    global token
+    token = request.form.get("token") 
+    print(token)
     
     
         
@@ -33,7 +33,7 @@ def gfg():
       
                      
     else:
-        return render_template("create_code.html")
+        return render_template("create_token.html")
 
     
 
@@ -41,12 +41,12 @@ if __name__ == '__main__':
     app.run(debug=False, host='localhost')
 
 
-print(authcode)
-#f= open("authcode.txt","w+")
-#f.write(authcode)
-#f.close()
+print(token)
+f= open("token.txt","w+")
+f.write(token)
+f.close()
 player = 'file:///C:/Users/aryan/OneDrive\Spotify-connect-web-FREE\spotify_web_sdk.html'
-url = player + "#" + authcode
+url = player + "#" + token
 webbrowser.register('chrome',
         None,
 webbrowser.BackgroundBrowser("C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
