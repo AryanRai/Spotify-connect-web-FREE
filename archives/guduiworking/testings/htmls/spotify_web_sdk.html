@@ -189,7 +189,7 @@
         console.log('Ready with Device ID', id);
         player.getCurrentState().then(state => {
         if (!state) {
-            console.log('User is not playing music through the Web Playback SDK');
+            console.error('User is not playing music through the Web Playback SDK');
         return;
   }
 
