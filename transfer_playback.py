@@ -39,4 +39,3 @@ def transferplayback():
     sp.transfer_playback(device_id, force_play=True)
 
 
-transferplayback()
