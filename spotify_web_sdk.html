@@ -89,38 +89,57 @@
     var client_secret = "0d4ad994fff34cdbb964f8697748ad9e";
     var redirect_uri = "http://localhost:5000/spotify";
 
-    jQuery.ajax({
-        url : 'https://accounts.spotify.com/api/token',
-        type: 'POST',
-        data: {grant_type: "authorization_code", code: auth_code, redirect_uri: redirect_uri, client_id: client_id, client_secret: client_secret},
-        success: function(data) {
-          ajaxResult.push(data);
-          console.log(data);
-          var returnjson = data;
-          access_token =  returnjson.access_token;
-          refresh_token = returnjson.refresh_token;
-          console.log("token",access_token);
-          console.log("refresh",refresh_token);
-          
-        }
-
-      });
     
-        
     
-      
-     
-
-    
-        
-    
-
+       
     window.onSpotifyWebPlaybackSDKReady = () => {
       
       const player = new Spotify.Player({
         name: 'Magic Speaker',
-        getOAuthToken: cb => { cb(access_token); 
-            
+        getOAuthToken: cb => { 
+        	if (access_token === "") {
+        		console.log("getting access token");
+        		jQuery.ajax({
+			        url : 'https://accounts.spotify.com/api/token',
+			        type: 'POST',
+			        data: {grant_type: "authorization_code", code: auth_code, redirect_uri: redirect_uri, client_id: client_id, client_secret: client_secret},
+			        success: function(data) {
+			          ajaxResult.push(data);
+			          console.log(data);
+			          var returnjson = data;
+			          access_token =  returnjson.access_token;
+			          refresh_token = returnjson.refresh_token;
+			          console.log("token",access_token);
+			          console.log("refresh",refresh_token);
+          
+			        }
+
+			      });
+
+        	}
+
+        	else {
+        		console.log("refreshing token");
+        		jQuery.ajax({
+			        url : 'https://accounts.spotify.com/api/token',
+			        type: 'POST',
+			        data: {grant_type: "refresh_token", refresh_token: refresh_token, client_id: client_id, client_secret: client_secret},
+			        success: function(data) {
+			          ajaxResult.push(data);
+			          console.log(data);
+			          var returnjson = data;
+			          access_token =  returnjson.access_token;
+			          console.log("new token",access_token);
+			 
+          
+			        }
+
+			      });
+
+        	}
+
+        	cb(access_token); 
+            console.log("geting oauth token");
           }
       });
 
