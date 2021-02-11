@@ -1,0 +1,18 @@
+sudo apt-get install python3-pip libglib2.0-dev
+sudo pip3 install bluepy
+
+
+git clone https://github.com/ewenchou/bluetooth-proximity.git
+cd bluetooth-proximity
+sudo python setup.py install
+
+
+
+
+
+pip install spotipy --upgrade
+
+
+
+
+pip install Flask
