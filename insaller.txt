@@ -16,3 +16,16 @@ pip install spotipy --upgrade
 
 
 pip install Flask
+
+python3 -m pip install python-dev-tools --user --upgrade
+
+
+WINDOWS
+
+pip install pyparsing
+pip install eel
+
+
+
+
+RASPI
