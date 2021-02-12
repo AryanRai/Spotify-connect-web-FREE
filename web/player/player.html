@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Spotify ig</title>
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./glass.css">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+  <link rel="stylesheet" href="./glass.css">
+  <link rel="icon" type="image/jpg" href="assets/disk.jpg" id="favicon">
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/eel.js"></script>
@@ -67,6 +69,7 @@
     var tracknamebox = document.getElementById('track-name')    
     var playerTrack = document.getElementById('player-track')
     var seekarea = document.getElementById('s-area')
+    var icon = document.getElementById('favicon')
 
     var playbutton = document.getElementById('play-pause-button')
     var previousbutton = document.getElementById('play-previous')
@@ -170,7 +173,8 @@
 
       // Playback status updates
       player.addListener('player_state_changed', state => { 
-             console.log(state); 
+             console.log(state);
+             icon.setAttribute('href',state.track_window.current_track.album.images[2].url); 
              albumart = state.track_window.current_track.album.images[2].url;
              artistname = state.track_window.current_track.artists[0].name;
              trackname = state.track_window.current_track.name;              
