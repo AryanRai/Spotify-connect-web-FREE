@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 import eel
-eel.init('eel')
+eel.init('web')
 
-#eel.start('start/start.html')
+eel.start('start/start.html')
 
 app = Flask(__name__)
 

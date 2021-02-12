@@ -22,15 +22,14 @@ const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = '920c3cf9d0784efb977c1b9d8c127d93';
-const redirectUri = 'http://localhost:5000/spotify';
+const redirectUri = 'http://localhost:8000/player/player.html';
 const scopes = [
   'streaming',
   'user-read-email',
   'user-read-private',
   'user-modify-playback-state',
   'user-read-playback-state',
-  'user-read-currently-playing',
-  'app-remote-control'
+  'user-read-currently-playing'
 ];
 
 

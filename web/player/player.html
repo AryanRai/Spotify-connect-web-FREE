@@ -6,6 +6,7 @@
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'><link rel="stylesheet" href="./glass.css">
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
 
@@ -72,10 +73,11 @@
     var nextbutton = document.getElementById('play-next')
     i = document.getElementById('playpause')
 
-    var id = "abc"
-    var hash = location.hash.substr(1);;
-    var raw_token = hash;
-    
+    var id = "abc";
+    var params = location.search;
+    console.log(params);
+    var raw_token = params.replace("?code=", "");
+    console.log(raw_token);
     var musicstatus = "paused";
     var trackname = "";
     var artistname = "";
@@ -87,7 +89,7 @@
     var refresh_token = "";
     var client_id = "920c3cf9d0784efb977c1b9d8c127d93";
     var client_secret = "0d4ad994fff34cdbb964f8697748ad9e";
-    var redirect_uri = "http://localhost:5000/spotify";
+    var redirect_uri = "http://localhost:8000/player/player.html";
 
     
     
