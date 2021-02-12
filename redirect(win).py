@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
-import webbrowser
+import eel
+eel.init('eel')
+
+#eel.start('start/start.html')
 
 app = Flask(__name__)
 
@@ -29,8 +32,9 @@ def gfg():
     
         
     if request.method == "POST": 
+        shutdown_server()
         return render_template("shutdown.html")
-      
+        
                      
     else:
         return render_template("create_code.html")
@@ -45,10 +49,7 @@ print(authcode)
 #f= open("authcode.txt","w+")
 #f.write(authcode)
 #f.close()
-player = 'file:///C:/Users/aryan/OneDrive\Spotify-connect-web-FREE\spotify_web_sdk.html'
+player = 'player/player.html'
 url = player + "#" + authcode
-webbrowser.register('chrome',
-        None,
-webbrowser.BackgroundBrowser("C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
-webbrowser.get('chrome').open(url)
-
+print(url)
+eel.start(url)

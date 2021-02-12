@@ -23,7 +23,7 @@ python3 -m pip install python-dev-tools --user --upgrade
 WINDOWS
 
 pip install pyparsing
-pip install eel
+pip3 install eel
 
 
 
