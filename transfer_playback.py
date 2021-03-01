@@ -35,7 +35,7 @@ def transferplayback():
     premtoken = format(getpremtoken())
     print (premtoken)
     sp = spotipy.Spotify(auth=premtoken)
-    device_id = "554d497b2fc24f614fccedaefee3da011ff1e981"
+    device_id = "1590109f9d23072e3462af5ebfb5c2025fc668be"
     sp.transfer_playback(device_id, force_play=True)
 
 

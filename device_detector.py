@@ -79,7 +79,7 @@ while True:
 
     if rssi == rssi_prev1 == rssi_prev2 == None:
         print datetime.datetime.now(), "can't detect address"
-        time.sleep(3)
+        time.sleep(1)
         
 
     elif rssi == rssi_prev1 == rssi_prev2 == 0:
@@ -98,7 +98,7 @@ while True:
             os.system(near_cmd)
             print datetime.datetime.now(), "changing to near"
 
-        time.sleep(3)
+        time.sleep(1)
 
     elif rssi < -2 and rssi_prev1 < -2 and rssi_prev2 < -2:
         # if were near and single has been consisitenly low
@@ -113,12 +113,12 @@ while True:
             far_count = 0
             os.system(far_cmd)
             print datetime.datetime.now(), "changing to far"
-            time.sleep(3)
+            time.sleep(1)
 
     else:
         
         print "is near aryan style"
-        if nearness_count > 10:
+        if nearness_count > 15:
             nearness_count = 0
             print "playing"
             transferplayback()

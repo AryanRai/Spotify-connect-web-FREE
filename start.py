@@ -1,55 +1,24 @@
-from flask import Flask, render_template, request
 import eel
+
 eel.init('web')
 
-eel.start('start/start.html')
+def my_other_thread():
+    while True:
+        print("I'm a thread")
+        eel.sleep(1)
+        if int(input()) > 0:
+            eel.nowplaying()        # Use eel.sleep(), not time.sleep()
 
-app = Flask(__name__)
+eel.spawn(my_other_thread)
 
-authcode = "abc"
+#eel.nowplaying()
 
-
-    
-def shutdown_server():
-    func = request.environ.get('werkzeug.server.shutdown')
-    if func is None:
-        raise RuntimeError('Not running with the Werkzeug Server')
-    func()
-
-@app.route('/shutdown', methods=["GET", "POST"])
-def shutdown():
-    
-    shutdown_server()
-    return 'Server shutting down...'
-
-        
-@app.route('/spotify', methods =["GET", "POST"]) 
-def gfg(): 
-    global authcode
-    authcode = request.form.get("authcode") 
-    print(authcode)
-    
-    
-        
-    if request.method == "POST": 
-        shutdown_server()
-        return render_template("shutdown.html")
-        
-                     
-    else:
-        return render_template("create_code.html")
+eel.start('start/start.html', block=False)
+while True:
+    print("I'm a main loop")
+    eel.sleep(1)
 
     
 
-if __name__ == '__main__':
-    app.run(debug=False, host='localhost')
 
 
-print(authcode)
-#f= open("authcode.txt","w+")
-#f.write(authcode)
-#f.close()
-player = 'player/player.html'
-url = player + "#" + authcode
-print(url)
-eel.start(url)

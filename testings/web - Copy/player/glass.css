@@ -17,7 +17,7 @@ body
     visibility: hidden;
     width: 100%;
     position: relative;
-    height: 600px;
+    height: 500px;
     z-index: 4;
     overflow:hidden;
     border: hidden;
