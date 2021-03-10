@@ -1,9 +1,9 @@
 from bt_proximity import BluetoothRSSI
 import time
 import sys
+from transfer_playback import *
 
-BT_ADDR = '20:A6:0C:B4:2B:61'  # You can put your Bluetooth address here
-NUM_LOOP = 100
+#BT_ADDR = '20:A6:0C:B4:2B:61'  # You can put your Bluetooth address here
 
 
 def print_usage():
@@ -11,7 +11,8 @@ def print_usage():
         "Usage: python test_address.py <bluetooth-address> [number-of-requests]")
 
 
-def main():
+def detector(device_id, BT_ADDR, NUM_LOOP):
+    avg = 0
     if len(sys.argv) > 1:
         addr = sys.argv[1]
     elif BT_ADDR:
@@ -30,12 +31,24 @@ def main():
        
        
         print (a)
-        if int(a) > 9:
+       
+        if a == "None":
+            print("not in range")
+           
+       
+        elif int(a) > 9:
             print ("aarush pagal hai")
-        time.sleep(1)
+            avg += 1
+           
+        elif int(a) < 9:
+            print ("akki pagal hai")
+            avg = 0    
+           
+        if avg >= 3:
+            avg = 0
+            print ("aarush and jasman pagal hai")
+            transferplayback()
+           
+        time.sleep(0.25)
 
    
-   
-
-if __name__ == '__main__':
-    main()
