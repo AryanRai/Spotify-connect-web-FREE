@@ -25,6 +25,7 @@ WINDOWS
 pip install pyparsing
 pip3 install eel
 
+pip install bt_proximity
 
 
 
