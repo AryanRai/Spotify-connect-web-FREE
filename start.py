@@ -9,7 +9,7 @@ def my_other_thread():
         if int(input()) > 0:
             eel.nowplaying()        # Use eel.sleep(), not time.sleep()
 
-eel.spawn(my_other_thread)
+#eel.spawn(my_other_thread)
 
 #eel.nowplaying()
 
