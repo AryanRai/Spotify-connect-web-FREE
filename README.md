@@ -1,5 +1,11 @@
 # Spotify-connect-web-FREE
 
+
+###########################################################################deprecated#################################################################################
+
+
+
+
 BACKGROUND
 so as a Spotify user I wanted to use Spotify WITH 
 MUSIC STREAMING on my raspi which had Gassistpi 
